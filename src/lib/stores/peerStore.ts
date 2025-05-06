@@ -40,9 +40,11 @@ export class PeerStore {
             port: 443,
             path: '/'
         });
+
         peer.on('open', (id) => {
             runInAction(() => {
                 this.peerId = id;
+                console.log("currentPeerId: " + this.peerId)
             });
         });
 
@@ -67,7 +69,6 @@ export class PeerStore {
         });
 
         this.peerInstance = peer;
-        console.log("currentPeerId: " + this.peerId)
     }
 
     makeCall() {
