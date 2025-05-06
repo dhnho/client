@@ -40,6 +40,7 @@ export class MessageStore {
         this.hubConnection.on('ReceiveCallRequest', async (request: CallRequest) => {
             await runInAction(async () => {
                 console.log(request)
+                console.log("currentPeerId: " + store.peerStore.peerId)
                 store.peerStore.remotePeerId = request.peerId
                 store.peerStore.remoteUser = request.user
                 store.peerStore.callStatus = 'reply'
@@ -48,7 +49,6 @@ export class MessageStore {
 
         this.hubConnection.on('ReceiveRemoteUser', async (request: CallRequest) => {
             await runInAction(() => {
-                console.log(request)
                 store.peerStore.remoteUser = request.user
                 store.peerStore.remotePeerId = request.peerId
             })
@@ -110,6 +110,8 @@ export class MessageStore {
         runInAction(() => {
             store.peerStore.callStatus = 'pending'
         })
+
+        console.log("remoteUserId: " + remoteUserId + ", currentPeerId: " + store.peerStore.peerId)
         
         await this.hubConnection.invoke('SendCallRequest', remoteUserId, store.peerStore.peerId)
     } 

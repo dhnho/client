@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from "react-router";
+import { Outlet, useLocation, useNavigate } from "react-router";
 import Navbar from "../../app/layout/Navbar";
 import Messages from "../chats/Messages";
 import Friending from "../friends/Friending";
@@ -18,12 +18,14 @@ const Dashboard = observer(() => {
     const { currentUser, loadingCurrentUser } = useAccount()
 
     const location = useLocation()
+    const navigate = useNavigate()
     
     //Yêu cầu nhập thông tin nếu lần đầu sử dụng
     useEffect(() => {
         if(loadingCurrentUser) return
 
         if(!currentUser) {
+            navigate('/login')
             return
         }
 
