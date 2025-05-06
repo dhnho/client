@@ -67,6 +67,7 @@ export class PeerStore {
         });
 
         this.peerInstance = peer;
+        console.log("currentPeerId: " + this.peerId)
     }
 
     makeCall() {
