@@ -1,0 +1,9 @@
+#call-request {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+#call-request img {
+    height: 150px;
+    width: 150px;
+    border: 2px solid white;
+}

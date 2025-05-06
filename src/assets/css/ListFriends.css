@@ -1,0 +1,26 @@
+#list-friend {
+    padding: 22px;
+}
+
+#list-friend .list-friend-heading{
+    color: #0A2689;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+#list-friend .group-btn-wrapper > button {
+    white-space: nowrap;
+    min-width: 117px;
+}
+
+
+#list-friend .position-relative{
+    margin: 22px 0;
+}
+
+
+#list-friend .fa-ellipsis-vertical{
+    color:var(--gradient-right);
+    font-size: 18px;
+}

@@ -1,0 +1,121 @@
+/* .contact-icon-group {
+    width: 100px;
+} */
+
+.message-thread {
+    border-right: 1px solid #ccc;
+}
+
+.message-thread-wrapper {
+    padding: 0 24px;
+}
+
+.message-thread-header {
+    padding: 12px 0;
+    border-bottom: 1px solid #E5EAFF;
+}
+
+.message-thread-body {
+    height: calc(100vh - 152px);
+    overflow: auto;
+}
+
+.message-thread-body::-webkit-scrollbar { 
+    display: none;
+}
+
+.message-thread-body .message-wrap {
+    margin-bottom: 16px;
+}
+
+.message-thread-body .message {
+    max-width: 317px;
+    word-wrap: break-word;
+    margin: 0;
+    border-radius: calc(10px / 1.5);
+}
+
+.message-wrap .message-sender-name {
+    font-size: 10px;
+    color: #aaa;
+}
+
+.message-wrap .message-time {
+    color: #aaa;
+    font-size: 8px;
+    font-weight: 400;
+    margin-top: calc(8px / 1.5);
+}
+
+.contact-icon-group .fa-phone, 
+.contact-icon-group .fa-video,
+.contact-icon-group .fa-user-plus,
+.contact-icon-group .fa-ellipsis-vertical {
+    -webkit-text-stroke: 1px var(--gradient-right);
+    color: white;
+}
+
+ /* {
+    background: linear-gradient(180deg, var(--gradient-left) 0%, var(--gradient-right) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+} */
+
+.contact-icon-group i {
+    font-size: 20px;
+    width: 22px;
+    height: 22px;
+    /* padding: 2px; */
+}
+
+.contact-icon-group li {
+    padding: 2px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-icon-group li:hover {
+    cursor: pointer;
+    /* background-color: rgba(143, 18, 253, 20%); */
+}
+
+hr {
+    width: 120px;
+    border: 1.5px solid #E5EAFF;
+}
+
+span.timeline {
+    margin: 0 18px;
+    color: #0A2689;
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.send-message-form {
+    padding: 18px 22px;
+    border-top: 1px solid #ccc;
+}
+
+.send-message-form i {
+    background: linear-gradient(180deg, var(--gradient-left) 0%, var(--gradient-right) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: calc(32px / 1.5);
+    padding: 3px;
+}
+
+.send-message-form button {
+    border: 0;
+    background-color: transparent;
+}
+
+.send-message-form input {
+    border: 0;
+    outline: 0;
+    font-size: calc(22px / 1.5);
+    font-weight: 400;
+    padding-left: 10px;
+}

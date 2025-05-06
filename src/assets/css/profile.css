@@ -1,0 +1,65 @@
+#profile {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(208, 208, 208, 80%);
+    font-size: 16px;
+}
+
+.profile-wrapper {
+    width: 450px;
+    background-color: white;
+    padding: 36px 22px;
+    border-radius: 14px;
+}
+
+.fa-regular.fa-pen-to-square {
+    padding: 4px;
+    font-size: 14px;
+}
+
+.profile-header {
+    padding-bottom: 14px;
+    border-bottom: 1px solid #F3F4F6;
+}
+
+.profile-header .email {
+    font-size: 14px;
+    color: #6B7280;
+}
+
+.control-form {
+    display: flex;
+    justify-content: space-between;
+    padding: 22px 0;
+    border-bottom: 1px solid #F3F4F6;
+}
+
+.react-datepicker-wrapper,
+.control-form input {
+    margin-left: 6px;
+    text-align: right;
+    flex-grow: 1;
+    border: 0;
+    outline: none;
+    color: #4B5563;
+}
+
+.control-form select {
+    border: 0;
+    color: #4B5563;
+    outline: none;
+    text-align: right;
+}
+
+.profile-form button.btn-profile-submit {
+    border: 0;
+    background: linear-gradient(90deg, var(--gradient-left) 0%, var(--gradient-right) 100%);
+    color: white;
+    padding: 8px 22px;
+    border-radius: 6px;
+    margin-top: 42px;
+    font-size: 14px;
+}

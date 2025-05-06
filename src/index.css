@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Inter';
+}
+
+:root {
+    --gradient-left: #4294E3;
+    --gradient-right: #8F12FD;
+    --text-weight: #0A2689;
+}
+
+.your-message {
+    background: #E5EAFF;
+    color: black;
+}
+
+.my-message {
+    background: linear-gradient(90deg, rgba(66, 148, 227, 0.80) 0%, rgba(143, 18, 253, 0.80) 100%);
+    color: white;
+}
+
+.img-fluid {
+    object-fit: cover;
+    width: 54px;
+    height: 54px;
+}
+
+.search-input {
+    padding: 10px 14px 10px 40px;
+    border-radius: 6px;
+    border: 1px solid #E5EAFF;
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+}
+
+i.fa-magnifying-glass {
+    color: #a3a3a3;
+    padding-left: 14px;
+}
+
+.group-btn-wrapper {
+    background-color: #f2f5ff;
+    border-radius: 8px;
+    margin: 22px 0;
+}
+
+.group-btn {
+    padding: 3px 10px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, rgba(66, 148, 227, 0.20) 0%, rgba(143, 18, 253, 0.20) 100%);
+    color: #0A2689;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: center;
+    border: 0;
+    margin: 3px;
+    border-radius: 3px;
+}
+
+.cancel-btn {
+    color: #9D9D9D;
+    font-size: 12px;
+    font-weight: 400;
+    border: 0;
+    background-color: transparent;
+    padding: 0 16px;
+}
+
+button:disabled, button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.spinner-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+input:disabled {
+    background-color: white;
+    cursor: not-allowed;
+}
+
+.app-container {
+    padding-left: 75px;
+}
+
+@media screen and (max-width: 576px) {
+    .app-container {
+        padding-left: 0;
+    }
+}

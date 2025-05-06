@@ -1,0 +1,50 @@
+.friending-heading {
+    color: var(--text-weight);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.friend-header {
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ccc;
+}
+
+.friending {
+    /* visibility: hidden; */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(208, 208, 208, 50%);
+}
+
+.friending-wrapper {
+    padding: 14px 14px 20px;
+    border-radius: 10px;
+    width: 467px;
+}
+
+.friending .search-wrapper {
+    padding: 26px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.friending .search-wrapper .search-result {
+    margin-top: 26px;
+}
+
+.friending-close-btn {
+    font-size: 24px;
+    color: var(--text-weight);
+    cursor: pointer;
+}
+
+.sender-list {
+    max-height: 52vh;
+    overflow: overlay;
+}
+
+#suggestion {
+    border-top: 1px solid #ccc;
+}

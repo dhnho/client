@@ -1,0 +1,46 @@
+.background-calling {
+    filter: blur(10px);
+    transform: scale(1.1);
+}
+
+.avatar-calling {
+    width: 200px;
+}
+
+.time-calling {
+    font-size: 24px;
+    color: #3BDD3B;
+}
+
+.btn-calling-control {
+    color: white;
+    font-size: 28px;
+    border-radius: 50%;
+    background-color: #ccc;
+    padding: 6px 12px;
+    border: 0;
+    margin: 0 24px;
+}
+
+.btn-calling-control > i {
+    width: 30px;
+    -webkit-text-stroke: transparent;
+}
+
+.btn-calling-control:hover {
+    color: white;
+}
+
+.cancel-calling {
+    background-color: #FF0000;
+    transform: rotate(135deg);
+}
+
+.accept-calling {
+    background-color: green;
+}
+
+.video-ref {
+    height: 180px;
+    transform: scaleX(-1);
+}
