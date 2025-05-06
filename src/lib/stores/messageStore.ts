@@ -18,7 +18,7 @@ export class MessageStore {
 
         this.hubConnection = new HubConnectionBuilder()
             .withUrl(`${import.meta.env.VITE_MESSAGE_URL}`, {
-                withCredentials: true,
+                withCredentials: false,
             })
             .withAutomaticReconnect()
             .build();
