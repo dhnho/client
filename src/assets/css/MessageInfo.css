@@ -26,9 +26,9 @@
     color: #000842;
 }
 
-#info .info-heading:hover > i {
+/* #info .info-heading:hover > i {
     display: inline !important;
-}
+} */
 
 .image-gallery-content.image-gallery-thumbnails-bottom {
     height: 100vh;

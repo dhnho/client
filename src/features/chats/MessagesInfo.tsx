@@ -91,7 +91,7 @@ export default function MessagesInfo({ hideInfo, avatar, name, type }: Props) {
                         {groupInfo.groupInfo.name ?? name}
 
                         {type === 'group' &&
-                            <i className="fa-regular fa-pen-to-square cursor-pointer ms-1 d-none position-absolute" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+                            <i className="fa-regular fa-pen-to-square cursor-pointer ms-1 position-absolute" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
                         }
                     </h5>
                 </div>

@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate } from "react-router";
+import { Outlet, useLocation } from "react-router";
 import Navbar from "../../app/layout/Navbar";
 import Messages from "../chats/Messages";
 import Friending from "../friends/Friending";
@@ -15,29 +15,26 @@ const Dashboard = observer(() => {
     const [showFriending, setShowFriending] = useState(false)
     const [showProfile, setShowProfile] = useState(false)
 
-    const { currentUser, loadingCurrentUser } = useAccount()
+    const { currentUser } = useAccount()
 
     const location = useLocation()
-    const navigate = useNavigate()
     
     //Yêu cầu nhập thông tin nếu lần đầu sử dụng
     useEffect(() => {
-        if(loadingCurrentUser) return
-
         if(!currentUser) {
-            navigate('/login')
+            store.uiStore.isBusy()
             return
         }
 
-        // if(currentUser)
-        //     store.uiStore.isIdle()
+        if(currentUser)
+            store.uiStore.isIdle()
 
         if(!currentUser.fullname) {
             setShowProfile(true)
             toast.warning("Vui lòng nhập đầy đủ thông tin")
         }
 
-    }, [loadingCurrentUser, currentUser])
+    }, [currentUser])
 
     //Xử lí ẩn hiện trên nhiều màn hình
     const divRef = useRef(null);

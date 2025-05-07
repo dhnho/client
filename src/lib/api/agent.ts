@@ -1,5 +1,6 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { store } from "../stores/store";
 // import { store } from "../stores/store";
 
 const agent = axios.create({
@@ -22,9 +23,11 @@ agent.interceptors.response.use(
         switch (status) {
             case 401:
                 if (error.response && error.response.data.error === 'Expired') {
+                    store.uiStore.isBusy()
                     try {
                         // localStorage.setItem('returnUrl', window.location.pathname);
                         await axios.post(import.meta.env.VITE_API_URL + '/account/refresh-token', {}, { withCredentials: true })
+                        store.uiStore.isIdle()
                         return agent(config)
                     } catch {
                         window.location.href = '/login'
