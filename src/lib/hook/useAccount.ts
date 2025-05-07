@@ -69,7 +69,8 @@ export const useAccount = () => {
             const response = await agent.post('/account/auth', schema);
             return response.data;
         },
-        onSuccess: async () => {
+        onSuccess: async (loginResponse) => {
+            localStorage.setItem('loginResponse', JSON.stringify(loginResponse))
             await queryClient.invalidateQueries({
                 queryKey: ['user']
             });

@@ -1,6 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { HubConnection, HubConnectionBuilder, HubConnectionState } from "@microsoft/signalr";
 import { store } from "./store";
+import { getToken } from "../util/util";
 
 export class MessageStore {
     messageGroup = {} as { [key: string]: Message[]; };
@@ -15,10 +16,13 @@ export class MessageStore {
 
     async createHubConnection() {
         if (this.hubConnection) return;
+        
+        const token = getToken()
+        if(!token) return
 
         this.hubConnection = new HubConnectionBuilder()
-            .withUrl(`${import.meta.env.VITE_MESSAGE_URL}`, {
-                withCredentials: true,
+            .withUrl(`${import.meta.env.VITE_MESSAGE_URL}` + 'message', {
+                accessTokenFactory: () => token
             })
             .withAutomaticReconnect()
             .build();

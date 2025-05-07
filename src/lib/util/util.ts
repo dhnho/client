@@ -22,7 +22,23 @@ export function timeAgo(date: DateArg<Date>) {
     return formatDistanceToNow(date, { locale: vi }) + ' trước'
 }
 
+export function getToken() {
+    const loginResponseString = localStorage.getItem('loginResponse')
+    if(!loginResponseString) return
 
+    const loginResponse = JSON.parse(loginResponseString) as LoginResponse
+
+    return loginResponse.token
+}
+
+export function getLoginResponse() {
+    const loginResponseString = localStorage.getItem('loginResponse')
+    if(!loginResponseString) return
+
+    const loginResponse = JSON.parse(loginResponseString) as LoginResponse
+
+    return loginResponse
+}
 
 
 

@@ -86,3 +86,9 @@ type ToggleCamera = {
     type: 'toggle-camera',
     showRemoteCamera: boolean
 }
+
+type LoginResponse = {
+    userId: number,
+    token: string,
+    refreshToken: string
+}

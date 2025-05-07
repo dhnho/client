@@ -39,9 +39,9 @@ export default function Navbar({ onShowFriending, onShowProfile, isHide }: Props
                     <Link to='/dashboard/friends' className="nav-link"><i className="fa-regular fa-address-book"></i></Link>
                 </li>
 
-                <li onClick={() => {onShowFriending()}} className="nav-item">
+                <li onClick={() => {onShowFriending()}} className="nav-item cursor-pointer">
                     <a className="nav-link">
-                        <i className="fa-solid fa-user-plus cursor-pointer position-relative">
+                        <i className="fa-solid fa-user-plus position-relative">
                             { senders && senders.length > 0 && <span className="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-success p-1"><span className="visually-hidden">unread messages</span></span> }
                         </i>
                     </a>
@@ -51,8 +51,8 @@ export default function Navbar({ onShowFriending, onShowProfile, isHide }: Props
                     <a onClick={onShowProfile} className="nav-link"><i className="fa-solid fa-user"></i></a>
                 </li>
 
-                <li className="nav-item">
-                    <a onClick={() => logout.mutate()} className="nav-link"><i className="fa-solid fa-circle-left cursor-pointer"></i></a>
+                <li className="nav-item cursor-pointer">
+                    <a onClick={() => logout.mutate()} className="nav-link"><i className="fa-solid fa-circle-left"></i></a>
                 </li>
 
                 {/* <div className="nav-item dropdown">

@@ -1,14 +1,19 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 import { store } from "../stores/store";
+import { getLoginResponse, getToken } from "../util/util";
 // import { store } from "../stores/store";
 
 const agent = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
-    withCredentials: true
+    baseURL: import.meta.env.VITE_API_URL
 });
 
 agent.interceptors.request.use(async config => {
+    const token = getToken()
+
+    if(token)
+        config.headers.Authorization = `Bearer ${token}`
+
     return config;
 });
 
@@ -22,17 +27,28 @@ agent.interceptors.response.use(
 
         switch (status) {
             case 401:
-                if (error.response && error.response.data.error === 'Expired') {
-                    store.uiStore.isBusy()
-                    try {
-                        // localStorage.setItem('returnUrl', window.location.pathname);
-                        await axios.post(import.meta.env.VITE_API_URL + '/account/refresh-token', {}, { withCredentials: true })
-                        store.uiStore.isIdle()
-                        return agent(config)
-                    } catch {
-                        window.location.href = '/login'
-                        return Promise.reject(error);
+                store.uiStore.isBusy()
+                try {
+                    const loginResponse = getLoginResponse()
+                    if(!loginResponse) {
+                        // window.location.href = '/login'
+                        return
                     }
+
+                    const { data } = await axios.post<LoginResponse>(import.meta.env.VITE_API_URL + `/account/refresh-token?refreshToken=${loginResponse.refreshToken}`, {})
+                    
+                    loginResponse.token = data.token
+                    loginResponse.refreshToken = data.refreshToken
+
+                    localStorage.setItem('loginResponse', JSON.stringify(loginResponse))
+
+                    store.uiStore.isIdle()
+                    return agent(config)
+
+                } catch {
+                    localStorage.removeItem('loginResponse')
+                    window.location.href = '/login'
+                    return Promise.reject(error);
                 }
 
                 break;
