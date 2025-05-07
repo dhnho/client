@@ -17,6 +17,7 @@ agent.interceptors.request.use(async config => {
     return config;
 });
 
+
 agent.interceptors.response.use(
     async response => {
         return response;
@@ -35,7 +36,9 @@ agent.interceptors.response.use(
                         return
                     }
 
-                    const { data } = await axios.post<LoginResponse>(import.meta.env.VITE_API_URL + `/account/refresh-token?refreshToken=${loginResponse.refreshToken}`, {})
+                    console.log(loginResponse)
+
+                    const { data } = await axios.post<LoginResponse>(import.meta.env.VITE_API_URL + `/account/refresh-token`, loginResponse)
                     
                     loginResponse.token = data.token
                     loginResponse.refreshToken = data.refreshToken
@@ -46,8 +49,8 @@ agent.interceptors.response.use(
                     return agent(config)
 
                 } catch {
-                    localStorage.removeItem('loginResponse')
-                    window.location.href = '/login'
+                    // localStorage.removeItem('loginResponse')
+                    // window.location.href = '/login'
                     return Promise.reject(error);
                 }
 

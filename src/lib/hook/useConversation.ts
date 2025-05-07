@@ -53,6 +53,7 @@ export const useConversation = (userId?: number, currentConversationId?: number)
     const updateAvatar = useMutation({
         mutationFn: async (formData: FormData) => {
             const response = await agent.put('/conversation/update-avatar', formData);
+            console.log(response.data)
             return response.data
         },
         onSuccess: async (imageUrl: string) => {

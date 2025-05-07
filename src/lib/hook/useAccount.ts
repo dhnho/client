@@ -112,6 +112,7 @@ export const useAccount = () => {
         },
         onSuccess: async () => {
             queryClient.removeQueries({ queryKey: ['user'] })
+            localStorage.removeItem('loginResponse')
             navigate('/login')
         }
     })
