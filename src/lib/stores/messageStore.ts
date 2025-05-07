@@ -66,6 +66,11 @@ export class MessageStore {
             store.peerStore.endCall()
         })
 
+        this.hubConnection.on("List", (conn, peer) => {
+            console.log(conn)
+            console.log(peer)
+        })
+
         await this.hubConnection.start().then(async () => {
             runInAction(() => {
                 this.isConnected = true
@@ -98,11 +103,11 @@ export class MessageStore {
     }
 
 
-    async savePeerId(peerId: string) {
-        if (!this.hubConnection || this.hubConnection.state !== HubConnectionState.Connected) return;
+    // async savePeerId(peerId: string) {
+    //     if (!this.hubConnection || this.hubConnection.state !== HubConnectionState.Connected) return;
 
-        await this.hubConnection.invoke('SavePeerId', peerId)
-    }
+    //     await this.hubConnection.invoke('SavePeerId', peerId)
+    // }
     
     async sendCallRequest(remoteUserId: number) {
         if (!this.hubConnection || this.hubConnection.state !== HubConnectionState.Connected) return;

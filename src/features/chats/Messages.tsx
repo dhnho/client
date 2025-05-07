@@ -88,10 +88,6 @@ const Messages = observer(() => {
 
     }, [currentUser]);
 
-    useEffect(() => {
-        store.messageStore.savePeerId(store.peerStore.peerId)
-    }, [store.peerStore.peerId])
-
     return (
         <div>
             <div className='message-header'>
