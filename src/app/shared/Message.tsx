@@ -30,7 +30,7 @@ export default function Message({ message, prevSenderId, type }: Props) {
                                 { message.content }
                             </div> 
                             : <div>
-                                <span hidden={isMyMessage || isPrevSender} className='mb-0 message-sender-name badge mb-1' style={{backgroundColor: "#E5EAFF"}}>{ type === 'group' && message.senderName }</span>
+                                <span hidden={isMyMessage || isPrevSender} className='mb-0 message-sender-name badge mb-1' style={{backgroundColor: "#E5EAFF"}}>{ type === 'group' && message.senderName }</span> <br />
                                 <img src={message.content} className="rounded-2" style={{maxWidth: '100%'}} alt="" />
                             </div>
                     }

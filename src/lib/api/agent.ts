@@ -1,5 +1,5 @@
 import axios from "axios";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import { store } from "../stores/store";
 import { getLoginResponse, getToken } from "../util/util";
 // import { store } from "../stores/store";
@@ -19,53 +19,54 @@ agent.interceptors.request.use(async config => {
 
 
 agent.interceptors.response.use(
-    async response => {
-        return response;
-    },
+    async response => response,
     async error => {
-        // store.uiStore.isIdle();
-        const { status, data, config } = error.response;
+        const originalRequest = error.config;
+        const { status } = error.response || {};
 
-        switch (status) {
-            case 401:
-                store.uiStore.isBusy()
-                try {
-                    const loginResponse = getLoginResponse()
-                    if(!loginResponse) {
-                        // window.location.href = '/login'
-                        return
-                    }
+        if (status === 401 && !originalRequest._retry) {
+            store.uiStore.isBusy();
 
-                    console.log(loginResponse)
+            try {
+                const loginResponse = getLoginResponse();
 
-                    const { data } = await axios.post<LoginResponse>(import.meta.env.VITE_API_URL + `/account/refresh-token`, loginResponse)
-                    
-                    loginResponse.token = data.token
-                    loginResponse.refreshToken = data.refreshToken
-
-                    localStorage.setItem('loginResponse', JSON.stringify(loginResponse))
-
-                    store.uiStore.isIdle()
-                    return agent(config)
-
-                } catch {
-                    // localStorage.removeItem('loginResponse')
-                    // window.location.href = '/login'
-                    return Promise.reject(error);
+                if (!loginResponse) {
+                    window.location.href = '/login';
+                    return;
                 }
 
-                break;
+                originalRequest._retry = true;
 
-            case 400:
-                toast.error(data.message);
-                break;
+                const refreshTokenResponse = await axios.post<LoginResponse>(
+                    `${import.meta.env.VITE_API_URL}/account/refresh-token`,
+                    loginResponse
+                );
 
-            default:
-                toast.error("Đã xảy ra lỗi không xác định");
+                const { token, refreshToken } = refreshTokenResponse.data;
+
+                // Cập nhật token mới
+                loginResponse.token = token;
+                loginResponse.refreshToken = refreshToken;
+
+                localStorage.setItem('loginResponse', JSON.stringify(loginResponse));
+
+                store.uiStore.isIdle();
+
+                // Gắn token mới và gửi lại request cũ
+                originalRequest.headers.Authorization = `Bearer ${token}`;
+                return agent(originalRequest);
+            } catch (refreshError) {
+                localStorage.removeItem('loginResponse');
+                // window.location.href = '/login';
+                return Promise.reject(refreshError);
+            } finally {
+                store.uiStore.isIdle();
+            }
         }
 
-        throw error
+        return Promise.reject(error);
     }
 );
+
 
 export default agent;
