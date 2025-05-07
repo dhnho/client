@@ -38,11 +38,11 @@ export default function Navbar({ onShowFriending, onShowProfile, isHide }: Props
                 </li>
 
                 <li onClick={() => {onShowFriending()}} className="nav-item">
-                    <a className="nav-link" href="#"><i className="fa-solid fa-user-plus"></i></a>
+                    <a className="nav-link"><i className="fa-solid fa-user-plus"></i></a>
                 </li>
 
                 <li className="nav-item">
-                    <a onClick={() => logout.mutate()} className="nav-link" href="#"><i className="fa-solid fa-circle-left"></i></a>
+                    <a onClick={() => logout.mutate()} className="nav-link"><i className="fa-solid fa-circle-left"></i></a>
                 </li>
 
                 {/* <div className="nav-item dropdown">

@@ -27,7 +27,7 @@ export class PeerStore {
     
         try {
             this.currentUserMedia = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
-            this.currentUserMedia.getVideoTracks().forEach(track => track.enabled = false);
+            // this.currentUserMedia.getVideoTracks().forEach(track => track.enabled = false);
         } catch {
             toast.warning("Vui lòng mở quyền truy cập camera và micro trong cài đặt trình duyệt.");
             return undefined;

@@ -16,10 +16,10 @@ const Calling = observer(() => {
     const endCall = () => {
         if (currentUserVideoRef.current) currentUserVideoRef.current.srcObject = null;
 
-        if(store.peerStore.callStatus === 'pending') {
-            store.peerStore.endCall()
-            return
-        }
+        // if(store.peerStore.callStatus === 'pending') {
+        //     store.peerStore.endCall()
+        //     return
+        // }
 
         if (remoteVideoRef.current) remoteVideoRef.current.srcObject = null;
 
@@ -36,7 +36,7 @@ const Calling = observer(() => {
         if(!store.peerStore.currentUserMedia) return
 
         store.peerStore.toggleCamera(showCamera)
-        store.peerStore.currentUserMedia.getVideoTracks().forEach(track => track.enabled = true);
+        // store.peerStore.currentUserMedia.getVideoTracks().forEach(track => track.enabled = true);
 
     }, [showCamera])
 
