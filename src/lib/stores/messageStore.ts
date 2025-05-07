@@ -66,9 +66,8 @@ export class MessageStore {
             store.peerStore.endCall()
         })
 
-        this.hubConnection.on("List", (conn, peer) => {
+        this.hubConnection.on("List", (conn) => {
             console.log(conn)
-            console.log(peer)
         })
 
         await this.hubConnection.start().then(async () => {

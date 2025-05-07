@@ -22,59 +22,64 @@ export class PeerStore {
         makeAutoObservable(this);
     }
 
-    async createPeerInstance(userId: number) {
-        if(this.peerInstance) return
-        
-        runInAction(async () => {
-            try {
-                this.currentUserMedia = await navigator.mediaDevices.getUserMedia({audio: true, video: true})
-                this.currentUserMedia.getVideoTracks().forEach(track => track.enabled = false);
-            } catch {
-                toast.warning("Vui lòng mở quyền truy cập camera và micro trong cài đặt trình duyệt.")
-            }
-        })
-
-        const peer = new Peer('chatz' + userId, {
-            host: "peerserver-to1e.onrender.com",
-            secure: true,
-            port: 443,
-            path: '/'
-        });
-
-        peer.on('open', (id) => {
-            runInAction(() => {
-                this.peerId = id;
-                console.log("currentPeerId: " + this.peerId)
+    async createPeerInstance(userId: number): Promise<string | undefined> {
+        if (this.peerInstance) return this.peerId;
+    
+        try {
+            this.currentUserMedia = await navigator.mediaDevices.getUserMedia({ audio: true, video: true });
+            this.currentUserMedia.getVideoTracks().forEach(track => track.enabled = false);
+        } catch {
+            toast.warning("Vui lòng mở quyền truy cập camera và micro trong cài đặt trình duyệt.");
+            return undefined;
+        }
+    
+        return new Promise((resolve, reject) => {
+            const peer = new Peer('chatz' + userId, {
+                host: "peerserver-to1e.onrender.com",
+                secure: true,
+                port: 443,
+                path: '/'
             });
-        });
-
-        peer.on('connection', conn => {
-            conn.on('data', (data) => {
+    
+            peer.on('open', (id) => {
                 runInAction(() => {
-                    const message = data as ToggleCamera
-                    this.showRemoteCamera = message.showRemoteCamera
-                })
+                    this.peerInstance = peer;
+                    this.peerId = id;
+                });
+                resolve(id);
+            });
+    
+            peer.on('error', (err) => {
+                console.error("PeerJS error:", err);
+                reject(err);
+            });
+    
+            peer.on('connection', conn => {
+                conn.on('data', (data) => {
+                    runInAction(() => {
+                        const message = data as ToggleCamera;
+                        this.showRemoteCamera = message.showRemoteCamera;
+                    });
+                });
+            });
+    
+            peer.on('call', (call) => {
+                if (!this.currentUserMedia) return;
+    
+                call.answer(this.currentUserMedia);
+                call.on('stream', (remoteStream) => {
+                    runInAction(() => {
+                        this.remoteUserMedia = remoteStream;
+                    });
+                });
             });
         });
-
-        peer.on("call", (call) => {
-            if(!this.currentUserMedia) return
-            
-            call.answer(this.currentUserMedia);
-            call.on("stream", (remoteStream) => {
-                runInAction(() => {
-                    this.remoteUserMedia = remoteStream
-                })
-            });
-        });
-
-        this.peerInstance = peer;
     }
+    
 
     makeCall() {
         if(!this.peerInstance || !this.currentUserMedia) return
-        
-        console.log(this.currentUserMedia)
+
         const call = this.peerInstance.call(this.remotePeerId, this.currentUserMedia);
 		call.on("stream", (remoteStream) => {
 			runInAction(() => {

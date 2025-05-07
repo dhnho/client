@@ -78,7 +78,8 @@ const Messages = observer(() => {
         if(!currentUser) return
 
         const setupConnection = async () => {
-            store.peerStore.createPeerInstance(currentUser.userId)
+            await store.peerStore.createPeerInstance(currentUser.userId)
+            console.log("currentPeerId: " + store.peerStore.peerId)
             if (!store.messageStore.isConnected) {
                 await store.messageStore.createHubConnection();
             }
